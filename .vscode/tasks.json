@@ -4,18 +4,30 @@
         {
             "label": "compile and run",
             "type": "shell",
-            "command": "cmd.exe",
-            "args": [
-                "/C",
-                "javac ${file} && java ${fileBasenameNoExtension} < input.txt > output.txt"
+            "command": "javac",
+             "args":[
+                "${relativeFile}",
+                "&&",
+                "/usr/bin/time",
+                "-o",
+                "analysis.txt",
+                "java",
+                "${relativeFileDirname}/${fileBasenameNoExtension}",
+                "<",
+                "${relativeFileDirname}/input.txt",
+                ">",
+                "${relativeFileDirname}/output.txt",
+                "&&",
+                "rm",
+                "-rf",
+                "${relativeFileDirname}/*.class"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": "true"
             },
             "presentation": {
-                "reveal": "never"
-                
+                "reveal": "silent"
             }
         }
     ]
